@@ -1,0 +1,74 @@
+<a href=home.php>Home</a><br><br>
+<form method="post" action="change-price.php">
+Search Tag:<input type="text" name="search">
+<input type="submit" name="submit" value="Search">
+</form>
+<form method="post" action="change-data-price.php">
+Item ID:<input type="text" name="itemID">
+New Price:<input type="text" name="newPrice">
+<input type="submit" name="submit" value="Change Price">
+</form>
+<form method="post" action="accept-bid.php">
+Item ID:<input type="text" name="itemID">
+<input type="submit" name="submit" value="Accept Bid">
+</form>
+<form method="post" action="delete.php">
+Item ID:<input type="text" name="itemID">
+<input type="submit" name="submit" value="Delete">
+</form>
+<form method="post" action="change-data-item.php">
+Edit Item:<br>
+Choose Item ID:<input type="text" name="itemID">
+<br>
+Name:<input type="text" name="name">
+Description:<input type="text" name="description">
+<input type="submit" name="submit" value="Edit">
+</form>
+<h2>Item List</h2>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+ 
+}
+th, td {
+    padding: 5px;
+}
+
+</style>
+</head>
+<body>
+
+<table class="table table-bordered table-condensed">
+<thead>
+<tr>
+<th>Name</th>
+<th>Price</th>
+<th>Current Bid</th>
+<th>Owner</th>
+<th>ItemID</th>
+<th>Bidder</th>
+<th>Sold</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<?php 
+while ($r = $result->fetch())
+{
+	echo "<tr>";
+	echo "<td>" . htmlspecialchars($r['name']) . "</td>";
+	echo "<td>" . htmlspecialchars($r['price']) . "</td>";
+	echo "<td>" . htmlspecialchars($r['bidPrice']) . "</td>";
+	echo "<td>" . htmlspecialchars($r['owner']) . "</td>";
+	echo "<td>" . htmlspecialchars($r['itemID']) . "</td>";
+	echo "<td>" . htmlspecialchars($r['bidder']) . "</td>";
+	echo "<td>" . htmlspecialchars($r['isSold']) . "</td>";
+	echo "<td>" . "<textarea readonly>" . htmlspecialchars($r['description']) . "</textarea>" . "</td>";
+	echo "</tr>";
+} 
+?>
+</tbody>
+</table>
+</body>
